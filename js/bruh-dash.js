@@ -10,53 +10,90 @@ var global = window || GLOBAL;
 global.bruhdash = {
 
   // returns the first element of an array
-  first: function () {
-      
+  first: function (arr) {
+      return arr[0];
   },
 
   // returns the last element of an array
-  last: function () {
-
+  last: function (arr) {
+    return arr[arr.length-1];
   },
 
   // returns the index of the first matching element from left to right
-  indexOf: function () {
-
+  indexOf: function (arr, value) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] === value) {
+        return i;
+      }
+    }
+    return -1;
   },
 
   // returns the index of the first matching element from right to left
-  lastIndexOf: function () {
-
+  lastIndexOf: function (arr, value) {
+    for (var i = arr.length-1; i >= 0; i--) {
+      if (arr[i] === value) {
+        return i;
+      }
+    }
+    return -1;
   },
 
   // returns an array with all elements except for the last element
-  initial: function () {
-
+  initial: function (arr) {
+    return arr.slice(0, -1);
   },
   
   // returns an array with all falsey values removed
-  compact: function() {
-
+  compact: function(arr) {
+    return arr.filter(Boolean);
   },
 
   // creates a slice of an array from the start index up to but not including the end index
-  slice: function () {
-
+  slice: function (arr, start, end) {
+    return arr.slice(start, end);
   },
 
   // returns a slice of array with n elements dropped from the beignning
-  drop: function(){
-
+  drop: function(arr, n){
+    if (n === undefined) {
+      return arr.slice(1);
+    }
+    else if (n === 0) {
+      return arr.slice(0);
+    }
+    else {
+      return arr.slice(n);
+    }
   },
 
   // returns a slice of array with n elements dropped from the end
-  dropRight: function() {
-
+  dropRight: function(arr, n) {
+    if (n === undefined) {
+      return arr.slice(0, -1);
+    }
+    else if (n === 0) {
+      return arr.slice(0);
+    }
+    else {
+      return arr.slice(0, -n);
+    }
   },
 
   // creates a slice of an array with n elements taken from the beginning
-  take: function () {
-
+  take: function (arr, n) {
+    if (n === undefined) {
+      return arr.slice(0, 1);
+    }
+    else if (n > arr.length) {
+      return arr.slice(0);
+    }
+    else if (n === 0) {
+      return [];
+    }
+    else {
+      return arr.slice(0, n);
+    }
   },
 
   // creates a slice of an array with n elements taken from the end
