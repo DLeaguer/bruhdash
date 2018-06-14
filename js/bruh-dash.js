@@ -115,28 +115,60 @@ global.bruhdash = {
 
   // fills elements of array with specified value from the start index
   // up to but not including the end index
-  fill: function() {
-
+  fill: function(arr, value, start, end) {
+    return arr.fill(value, start, end);
   },
 
   // removes all given values from an array
-  pull: function () {
-
+  pull: function (arr, value) {
+    var index = arr.indexOf(value);
+    
+    for(var i = 0; i < arr.length; i++) {
+      arr.splice(index, 1);
+    }
+    
+    return arr;
   },
 
   // removes elements of an array corresponding to the given indices
-  pullAt: function () {
-
+  pullAt: function (arr, index) {
+    var removedItems = [];
+  
+    for (var i = index.length-1; i >= 0; i--){
+      removedItems.push(arr.splice(index[i], 1));
+    }
+    
+    var a = removedItems.sort().toString().split(',').map(Number);
+    
+    console.log(a);  
+    return a;
   },
 
   // creates an array excluding all the specified values
-  without: function() {
-
+  without: function(arr, value) {
+    for (var i = 0; i < arr.length; i++) {
+      if(arr[i]===value){
+        arr.splice(i,1);
+      }
+    }
+      console.log(arr);
+      return arr;
   },
+      
 
   // returns an array with specified values excluded
-  difference: function() {
-
+  difference: function(arr, value) {
+    for (var j = 0; j < value.length; j++) {
+      for (var i = 0; i < arr.length; i++) {
+        if(arr[i]===value[j]){
+          arr.splice(i,1);
+        }
+        console.log(arr[i]);
+        console.log(value[j]);
+      }
+    }
+    console.log(arr);
+    return arr;
   },
 
   /*******************
@@ -144,18 +176,37 @@ global.bruhdash = {
    *******************/ 
 
   // creates an array of grouped elements
-  zip: function () {
-
+  zip: function (arr1, arr2) {
+    var combined = [];
+    for (var i = 0; i < arr1.length; i++) {
+      combined.push([arr1[i],arr2[i]]);
+    }
+    console.log(combined);
+    return combined;
   },
 
   // creates an array of grouped elements in their pre-zip configuration
-  unzip: function () {
-
+  unzip: function (arr) {
+    var arr1 = [];
+    var arr2 = [];
+    for (var i = 0; i < arr.length; i++) {
+      for (var j = 0; j < arr.length; j++) {
+        arr1.push(arr[i][j]);
+        arr2.push(arr[i][j + 1]);
+        break;
+      }
+    }
+    console.log([arr1, arr2]);
+    return [arr1, arr2];
   },
 
   // creates an array of elements into groups of length of specified size
-  chunk: function(){
-
+  chunk: function(arr, size){
+    var results = [];
+    while (arr.length) {
+      results.push(arr.splice(0, size));
+    }
+    return results;
   },
 
   // iterates over elements of a collection and invokes iteratee for each element
