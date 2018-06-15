@@ -97,14 +97,38 @@ global.bruhdash = {
   },
 
   // creates a slice of an array with n elements taken from the end
-  takeRight: function () {
-
+  takeRight: function (arr, n) {
+    if (n === undefined) {
+      return arr.slice(-1);
+    }
+    else if (n > arr.length) {
+      return arr.slice(0);
+    }
+    else if (n === 0) {
+      return [];
+    }
+    else {
+      return arr.slice(-n);
+    }
   },
 
   // fills elements of array with specified value from the start index
   // up to but not including the end index
-  fill: function() {
-
+  fill: function(arr, value, start, end) {
+    var len = end - start;
+    if (start === undefined && end === undefined) {
+      start = 0;
+      end = arr.length;
+      for(var i=0; i<end; i++){
+        arr.splice(i, 1, value);
+      }
+    }
+    else {
+      for(var i=start; i<end; i++) {
+        arr.splice(i, 1, value);
+      }
+    }
+    return arr;
   },
 
   // removes all given values from an array
