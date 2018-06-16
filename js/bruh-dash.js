@@ -10,8 +10,8 @@ var global = window || GLOBAL;
 global.bruhdash = {
 
   // returns the first element of an array
-  first: function (firstElement) {
-      return firstElement[0];
+  first: function (arr) {
+      return arr[0];
   },
 
   // returns the last element of an array
@@ -20,9 +20,9 @@ global.bruhdash = {
   },
 
   // returns the index of the first matching element from left to right
-  indexOf: function (arr, num) {
+  indexOf: function (arr, value) {
     for (var i = 0; i < arr.length; i++) {
-      if (arr[i] === num) {
+      if (arr[i] === value) {
         return i;
       }
     }
@@ -30,9 +30,9 @@ global.bruhdash = {
   },
 
   // returns the index of the first matching element from right to left
-  lastIndexOf: function (arr, num) {
-    for (var i = arr.length-1; i >=0; i--) {
-      if (arr[i] === num) {
+  lastIndexOf: function (arr, value) {
+    for (var i = arr.length-1; i >= 0; i--) {
+      if (arr[i] === value) {
         return i;
       }
     }
@@ -41,13 +41,23 @@ global.bruhdash = {
 
   // returns an array with all elements except for the last element
   initial: function (arr) {
-    return arr.slice(0,-1);
+    return arr.slice(0, -1);
   },
   
   // returns an array with all falsey values removed
   compact: function(arr) {
-    return arr.filter(function(v) {
-      return !!v; });
+    var newArr = [];
+    for (var i = arr.length - 1; i >= 0; i--) {
+      if (isNaN(arr[i]) || arr[i] === 0 || arr[i] === false || arr[i] === "" || arr[i] === undefined || arr[i] === null) {
+
+      // Which is same as
+      // if (!arr[i]) {
+          arr.splice(i, 1);
+      }
+  }
+
+  console.log(arr); 
+  return arr;
   },
 
   // creates a slice of an array from the start index up to but not including the end index
@@ -116,43 +126,50 @@ global.bruhdash = {
   // fills elements of array with specified value from the start index
   // up to but not including the end index
   fill: function(arr, value, start, end) {
-    return arr.fill(value, start, end);
+    if (start === undefined && end === undefined) {
+      start = 0;
+      end = arr.length;
+      for(var i=0; i<end; i++){
+        arr.splice(i, 1, value);
+      }
+    }
+    else {
+      for(var i=start; i<end; i++) {
+        arr.splice(i, 1, value);
+      }
+    }
+    return arr;
   },
 
   // removes all given values from an array
   pull: function (arr, value) {
     var index = arr.indexOf(value);
-    
-    for(var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < arr.length; i++) {
       arr.splice(index, 1);
     }
-    
     return arr;
   },
 
   // removes elements of an array corresponding to the given indices
   pullAt: function (arr, index) {
     var removedItems = [];
-  
-    for (var i = index.length-1; i >= 0; i--){
+    for (var i = index.length-1; i >= 0; i--) {
       removedItems.push(arr.splice(index[i], 1));
     }
-    
-    var a = removedItems.sort().toString().split(',').map(Number);
-    
-    console.log(a);  
-    return a;
+    var fix = removedItems.sort().toString().split(',').map(Number);
+    return fix;
   },
 
   // creates an array excluding all the specified values
-  without: function(arr, value) {
+  without: function(arr, a, b) {
+    var newArr = [];
     for (var i = 0; i < arr.length; i++) {
-      if(arr[i]===value){
-        arr.splice(i,1);
+      if(arr[i] !== a && arr[i] !== b) {
+        newArr.push(arr[i]);
       }
     }
-      console.log(arr);
-      return arr;
+      console.log(newArr);
+      return newArr;
   },
       
 
@@ -179,9 +196,8 @@ global.bruhdash = {
   zip: function (arr1, arr2) {
     var combined = [];
     for (var i = 0; i < arr1.length; i++) {
-      combined.push([arr1[i],arr2[i]]);
+        combined.push([arr1[i], arr2[i]]);
     }
-    console.log(combined);
     return combined;
   },
 
@@ -194,19 +210,31 @@ global.bruhdash = {
         arr1.push(arr[i][j]);
         arr2.push(arr[i][j + 1]);
         break;
+            
       }
     }
-    console.log([arr1, arr2]);
     return [arr1, arr2];
   },
 
   // creates an array of elements into groups of length of specified size
-  chunk: function(arr, size){
-    var results = [];
-    while (arr.length) {
-      results.push(arr.splice(0, size));
+  chunk: function(arr, chunkSize){
+    var newArr = [];
+    if (arr === [] || chunkSize === 0) {
+      return newArr;
     }
-    return results;
+    else if (chunkSize >= arr.length) {
+      return [arr];
+    }
+    else {
+      // for (var i = 0; i < arr.length; i += chunkSize) {
+        
+        newArr.push(arr.slice(i, i + chunkSize));
+        console.log(i);
+        console.log(chunkSize);
+        console.log(newArr);
+      // }
+    }
+    return newArr;
   },
 
   // iterates over elements of a collection and invokes iteratee for each element
