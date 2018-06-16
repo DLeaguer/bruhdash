@@ -46,7 +46,18 @@ global.bruhdash = {
   
   // returns an array with all falsey values removed
   compact: function(arr) {
-    return arr.filter(Boolean);
+    var newArr = [];
+    for (var i = arr.length - 1; i >= 0; i--) {
+      if (isNaN(arr[i]) || arr[i] === 0 || arr[i] === false || arr[i] === "" || arr[i] === undefined || arr[i] === null) {
+
+      // Which is same as
+      // if (!arr[i]) {
+          arr.splice(i, 1);
+      }
+  }
+
+  console.log(arr); 
+  return arr;
   },
 
   // creates a slice of an array from the start index up to but not including the end index
@@ -115,7 +126,6 @@ global.bruhdash = {
   // fills elements of array with specified value from the start index
   // up to but not including the end index
   fill: function(arr, value, start, end) {
-    var len = end - start;
     if (start === undefined && end === undefined) {
       start = 0;
       end = arr.length;
@@ -132,23 +142,49 @@ global.bruhdash = {
   },
 
   // removes all given values from an array
-  pull: function () {
-
+  pull: function (arr, value) {
+    var index = arr.indexOf(value);
+    for (var i = 0; i < arr.length; i++) {
+      arr.splice(index, 1);
+    }
+    return arr;
   },
 
   // removes elements of an array corresponding to the given indices
-  pullAt: function () {
-
+  pullAt: function (arr, index) {
+    var removedItems = [];
+    for (var i = index.length-1; i >= 0; i--) {
+      removedItems.push(arr.splice(index[i], 1));
+    }
+    var fix = removedItems.sort().toString().split(',').map(Number);
+    return fix;
   },
 
   // creates an array excluding all the specified values
-  without: function() {
-
+  without: function(arr, a, b) {
+    var newArr = [];
+    for (var i = 0; i < arr.length; i++) {
+      if(arr[i] !== a && arr[i] !== b) {
+        newArr.push(arr[i]);
+      }
+    }
+      console.log(newArr);
+      return newArr;
   },
 
   // returns an array with specified values excluded
-  difference: function() {
-
+  difference: function(arr, value) {
+    for (var j = 0; j < value.length; j++) {
+      for (var i = 0; i < arr.length; i++) {
+        if(arr[i]===value[j]){
+          arr.splice(i,1);
+        }
+        console.log(arr[i]);
+        console.log(value[j]);
+      }
+    }
+    console.log(arr);
+    return arr;
   },
 
   /*******************
@@ -156,18 +192,48 @@ global.bruhdash = {
    *******************/ 
 
   // creates an array of grouped elements
-  zip: function () {
-
+  zip: function (arr1, arr2) {
+    var combined = [];
+    for (var i = 0; i < arr1.length; i++) {
+        combined.push([arr1[i], arr2[i]]);
+    }
+    return combined;
   },
 
   // creates an array of grouped elements in their pre-zip configuration
-  unzip: function () {
-
+  unzip: function (arr) {
+    var arr1 = [];
+    var arr2 = [];
+    for (var i = 0; i < arr.length; i++) {
+      for (var j = 0; j < arr.length; j++) {
+        arr1.push(arr[i][j]);
+        arr2.push(arr[i][j + 1]);
+        break;
+            
+      }
+    }
+    return [arr1, arr2];
   },
 
   // creates an array of elements into groups of length of specified size
-  chunk: function(){
-
+  chunk: function(arr, chunkSize){
+    var newArr = [];
+    if (arr === [] || chunkSize === 0) {
+      return newArr;
+    }
+    else if (chunkSize >= arr.length) {
+      return [arr];
+    }
+    else {
+      // for (var i = 0; i < arr.length; i += chunkSize) {
+        
+        newArr.push(arr.slice(i, i + chunkSize));
+        console.log(i);
+        console.log(chunkSize);
+        console.log(newArr);
+      // }
+    }
+    return newArr;
   },
 
   // iterates over elements of a collection and invokes iteratee for each element
@@ -199,3 +265,5 @@ global.bruhdash = {
     
   }
 };
+
+global.bruhdash.chunk();
