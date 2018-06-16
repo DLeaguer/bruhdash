@@ -171,6 +171,7 @@ global.bruhdash = {
       console.log(newArr);
       return newArr;
   },
+      
 
   // returns an array with specified values excluded
   difference: function(arr, value) {
@@ -265,5 +266,3 @@ global.bruhdash = {
     
   }
 };
-
-global.bruhdash.chunk();
