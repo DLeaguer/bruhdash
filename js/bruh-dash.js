@@ -41,86 +41,183 @@ global.bruhdash = {
 
   // returns an array with all elements except for the last element
   initial: function (arr) {
-    return arr.slice(0, -1);
+    var newArr = [];
+    for (var i = 0; i < arr.length-1; i++) {
+      newArr[i] = arr[i];
+      // newArr.push(arr[i]);   // array method
+    }
+    return newArr;
+    // return arr.slice(0, -1);   // array method
   },
   
   // returns an array with all falsey values removed
   compact: function(arr) {
     var newArr = [];
-    for (var i = arr.length - 1; i >= 0; i--) {
-      if (isNaN(arr[i]) || arr[i] === 0 || arr[i] === false || arr[i] === "" || arr[i] === undefined || arr[i] === null) {
-
-      // Which is same as
-      // if (!arr[i]) {
-          arr.splice(i, 1);
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i]) {         // checks for true values
+        console.log(arr[i]); 
+        newArr[newArr.length] = arr[i];       // newArr empty, arr[0] goes into newArr[0], newArr.length becomes 1, arr[1] goes into newArr[1], newArr.length becomes 2...  
+        console.log(newArr);
       }
-  }
-
-  console.log(arr); 
-  return arr;
+    }
+    return newArr;
+    // with array methods
+    // for (var i = arr.length - 1; i >= 0; i--) {
+    //   // if (isNaN(arr[i]) || arr[i] === 0 || arr[i] === false || arr[i] === "" || arr[i] === undefined || arr[i] === null) {
+    //   // Which is same as
+    //   if (!arr[i]) {
+    //       arr.splice(i, 1);
+    //   }
+    // }
+    // console.log(arr); 
+    // return arr;
   },
 
   // creates a slice of an array from the start index up to but not including the end index
   slice: function (arr, start, end) {
-    return arr.slice(start, end);
+    var newArr = [];
+    for (var i = start; i < end; i++) {
+      newArr[newArr.length] = arr[i];
+      // newArr.push(arr[i]);   // array method
+    }
+    return newArr;
+    // return arr.slice(start, end);    // array method
   },
 
   // returns a slice of array with n elements dropped from the beignning
   drop: function(arr, n){
     if (n === undefined) {
-      return arr.slice(1);
+      var newArr = [];
+      for (var i = 1; i < arr.length; i++) {
+        newArr[newArr.length] = arr[i];
+        // newArr.push(arr[i]);   // array method
+      }
+      return newArr;
     }
     else if (n === 0) {
-      return arr.slice(0);
+      return arr;
     }
     else {
-      return arr.slice(n);
+      var newArr = [];
+      for (var i = n; i < arr.length; i++) {
+        newArr[newArr.length] = arr[i];
+        // newArr.push(arr[i]);     // array method
+      }
+      return newArr;
     }
+    // with array methods
+    // if (n === undefined) {
+    //   return arr.slice(1);
+    // }
+    // else if (n === 0) {
+    //   return arr.slice(0);
+    // }
+    // else {
+    //   return arr.slice(n);
+    // }
   },
 
   // returns a slice of array with n elements dropped from the end
   dropRight: function(arr, n) {
     if (n === undefined) {
-      return arr.slice(0, -1);
+      var newArr = [];
+      for (var i = 0; i < arr.length-1; i++) {
+        newArr[i] = arr[i];
+      }
+      return newArr;
     }
     else if (n === 0) {
-      return arr.slice(0);
+      return arr;
     }
     else {
-      return arr.slice(0, -n);
+      var newArr = [];
+      for (var i = 0; i < arr.length-n; i++) {
+        newArr[i] = arr[i];
+      }
+      return newArr;
     }
+    // with array methods
+    // if (n === undefined) {
+    //   return arr.slice(0, -1);
+    // }
+    // else if (n === 0) {
+    //   return arr.slice(0);
+    // }
+    // else {
+    //   return arr.slice(0, -n);
+    // }
   },
 
   // creates a slice of an array with n elements taken from the beginning
   take: function (arr, n) {
     if (n === undefined) {
-      return arr.slice(0, 1);
+      return [arr[0]];  
+      // return arr.slice(0, 1);    // array method
     }
     else if (n > arr.length) {
-      return arr.slice(0);
+      return arr;
+      // return arr.slice(0);   // array method
     }
     else if (n === 0) {
       return [];
     }
     else {
-      return arr.slice(0, n);
+      var newArr = [];
+      for (var i = 0; i < n; i++) {
+        newArr[i] = arr[i];
+      }
+      return newArr;
+      // return arr.slice(0, n);    // array method
     }
+    // with array methods
+    // if (n === undefined) {
+    //   return arr.slice(0, 1);
+    // }
+    // else if (n > arr.length) {
+    //   return arr.slice(0);
+    // }
+    // else if (n === 0) {
+    //   return [];
+    // }
+    // else {
+    //   return arr.slice(0, n);
+    // }
   },
 
   // creates a slice of an array with n elements taken from the end
   takeRight: function (arr, n) {
     if (n === undefined) {
-      return arr.slice(-1);
+      return [arr[arr.length-1]];
+      // return arr.slice(-1);    // array method
     }
     else if (n > arr.length) {
-      return arr.slice(0);
+      return arr;
+      // return arr.slice(0);   // array method
     }
     else if (n === 0) {
       return [];
     }
     else {
-      return arr.slice(-n);
+      var newArr = [];
+      for (var i = arr.length-n; i < arr.length; i++) {
+        newArr[newArr.length] = arr[i];
+      }
+      return newArr;      
+      // return arr.slice(-n);    // array method
     }
+    // with array methods
+    // if (n === undefined) {
+    //   return arr.slice(-1);
+    // }
+    // else if (n > arr.length) {
+    //   return arr.slice(0);
+    // }
+    // else if (n === 0) {
+    //   return [];
+    // }
+    // else {
+    //   return arr.slice(-n);
+    // }
   },
 
   // fills elements of array with specified value from the start index
@@ -130,34 +227,67 @@ global.bruhdash = {
       start = 0;
       end = arr.length;
       for(var i=0; i<end; i++){
-        arr.splice(i, 1, value);
+        
+        // arr.splice(i, 1, value);   // array method
       }
     }
     else {
       for(var i=start; i<end; i++) {
-        arr.splice(i, 1, value);
+
+        // arr.splice(i, 1, value);   // array method
       }
     }
     return arr;
+    // with array methods
+    // if (start === undefined && end === undefined) {
+    //   start = 0;
+    //   end = arr.length;
+    //   for(var i=0; i<end; i++){
+    //     arr.splice(i, 1, value);
+    //   }
+    // }
+    // else {
+    //   for(var i=start; i<end; i++) {
+    //     arr.splice(i, 1, value);
+    //   }
+    // }
+    // return arr;
   },
 
   // removes all given values from an array
   pull: function (arr, value) {
-    var index = arr.indexOf(value);
+
+    // var index = arr.indexOf(value);    // array method
     for (var i = 0; i < arr.length; i++) {
-      arr.splice(index, 1);
+
+      // arr.splice(index, 1);    // array method
     }
     return arr;
+    // with array methods
+    // var index = arr.indexOf(value);
+    // for (var i = 0; i < arr.length; i++) {
+    //   arr.splice(index, 1);
+    // }
+    // return arr;
   },
 
   // removes elements of an array corresponding to the given indices
   pullAt: function (arr, index) {
     var removedItems = [];
     for (var i = index.length-1; i >= 0; i--) {
-      removedItems.push(arr.splice(index[i], 1));
+
+      // removedItems.push(arr.splice(index[i], 1));    // array method
     }
-    var fix = removedItems.sort().toString().split(',').map(Number);
+
+    // var fix = removedItems.sort().toString().split(',').map(Number);   // array method
     return fix;
+    // with array methods
+    // var removedItems = [];
+    // for (var i = index.length-1; i >= 0; i--) {
+    //   removedItems.push(arr.splice(index[i], 1));
+    // }
+    // var fix = removedItems.sort().toString().split(',').map(Number);
+    // return fix;
   },
 
   // creates an array excluding all the specified values
@@ -165,11 +295,21 @@ global.bruhdash = {
     var newArr = [];
     for (var i = 0; i < arr.length; i++) {
       if(arr[i] !== a && arr[i] !== b) {
-        newArr.push(arr[i]);
+
+        // newArr.push(arr[i]);   // array method
       }
     }
       console.log(newArr);
       return newArr;
+    // with array methods
+    // var newArr = [];
+    // for (var i = 0; i < arr.length; i++) {
+    //   if(arr[i] !== a && arr[i] !== b) {
+    //     newArr.push(arr[i]);
+    //   }
+    // }
+    //   console.log(newArr);
+    //   return newArr;
   },
       
 
@@ -178,7 +318,8 @@ global.bruhdash = {
     for (var j = 0; j < value.length; j++) {
       for (var i = 0; i < arr.length; i++) {
         if(arr[i]===value[j]){
-          arr.splice(i,1);
+
+          // arr.splice(i,1);   // array method
         }
         console.log(arr[i]);
         console.log(value[j]);
@@ -186,6 +327,18 @@ global.bruhdash = {
     }
     console.log(arr);
     return arr;
+    // with array methods
+    // for (var j = 0; j < value.length; j++) {
+    //   for (var i = 0; i < arr.length; i++) {
+    //     if(arr[i]===value[j]){
+    //       arr.splice(i,1);
+    //     }
+    //     console.log(arr[i]);
+    //     console.log(value[j]);
+    //   }
+    // }
+    // console.log(arr);
+    // return arr;
   },
 
   /*******************
@@ -196,9 +349,16 @@ global.bruhdash = {
   zip: function (arr1, arr2) {
     var combined = [];
     for (var i = 0; i < arr1.length; i++) {
-        combined.push([arr1[i], arr2[i]]);
+
+      // combined.push([arr1[i], arr2[i]]);   // array method
     }
     return combined;
+    // with array methods
+    // var combined = [];
+    // for (var i = 0; i < arr1.length; i++) {
+    //   combined.push([arr1[i], arr2[i]]);
+    // }
+    // return combined;
   },
 
   // creates an array of grouped elements in their pre-zip configuration
@@ -207,13 +367,24 @@ global.bruhdash = {
     var arr2 = [];
     for (var i = 0; i < arr.length; i++) {
       for (var j = 0; j < arr.length; j++) {
-        arr1.push(arr[i][j]);
-        arr2.push(arr[i][j + 1]);
+
+        // arr1.push(arr[i][j]);    // array method
+        // arr2.push(arr[i][j + 1]);    // array method
         break;
-            
       }
     }
     return [arr1, arr2];
+    // with array methods
+    // var arr1 = [];
+    // var arr2 = [];
+    // for (var i = 0; i < arr.length; i++) {
+    //   for (var j = 0; j < arr.length; j++) {
+    //     arr1.push(arr[i][j]);
+    //     arr2.push(arr[i][j + 1]);
+    //     break;
+    //   }
+    // }
+    // return [arr1, arr2];
   },
 
   // creates an array of elements into groups of length of specified size
