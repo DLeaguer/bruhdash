@@ -289,14 +289,15 @@ global.bruhdash = {
 
   // removes elements of an array corresponding to the given indices
   pullAt: function (arr, index) {
-    var removedItems = [];
-    for (var i = index.length-1; i >= 0; i--) {
-
-      // removedItems.push(arr.splice(index[i], 1));    // array method
+    var newArr = [];
+    for (var i = 0; i < arr.length; i++) {
+      for (var j = 0; j < index.length; j++) {
+        if (i === index[j]) {
+          newArr[newArr.length] = arr[i];
+        }
+      }
     }
-
-    // var fix = removedItems.sort().toString().split(',').map(Number);   // array method
-    return fix;
+    return newArr;
     // with array methods
     // var removedItems = [];
     // for (var i = index.length-1; i >= 0; i--) {
