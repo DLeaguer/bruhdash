@@ -263,14 +263,22 @@ global.bruhdash = {
   },
 
   // removes all given values from an array
-  pull: function (arr, value) {
-
-    // var index = arr.indexOf(value);    // array method
-    for (var i = 0; i < arr.length; i++) {
-
-      // arr.splice(index, 1);    // array method
+  pull: function (arr, value1, value2) {
+    console.log(' all ', arr, value1, value2)
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    console.log(' arr[i] ', arr[i]);
+    if (arr[i] === value1 || arr[i] === value2) {
+      delete arr[i];
+      console.log(arr[i]);
     }
-    return arr;
+    else {
+      newArr[newArr.length] = arr[i];
+      console.log(' new arr[i] ', arr[i]);
+      console.log(' new ', newArr);
+    }
+  }
+  return newArr;
     // with array methods
     // var index = arr.indexOf(value);
     // for (var i = 0; i < arr.length; i++) {
