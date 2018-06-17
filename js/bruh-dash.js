@@ -226,18 +226,26 @@ global.bruhdash = {
     if (start === undefined && end === undefined) {
       start = 0;
       end = arr.length;
-      for(var i=0; i<end; i++){
-        
+      var newArr = [];
+      for(var i = 0; i < end; i++){
+        newArr[i] = value;
         // arr.splice(i, 1, value);   // array method
       }
+      return newArr;
     }
     else {
-      for(var i=start; i<end; i++) {
-
-        // arr.splice(i, 1, value);   // array method
+      var newArr = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (i < start || i >= end) {
+          newArr[newArr.length] = arr[i];
+        }
+        else {
+          newArr[newArr.length] = value;
+        }
       }
+      return newArr;
+      // arr.splice(i, 1, value);   // array method
     }
-    return arr;
     // with array methods
     // if (start === undefined && end === undefined) {
     //   start = 0;
