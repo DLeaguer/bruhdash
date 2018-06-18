@@ -311,13 +311,14 @@ global.bruhdash = {
   without: function(arr, a, b) {
     var newArr = [];
     for (var i = 0; i < arr.length; i++) {
-      if(arr[i] !== a && arr[i] !== b) {
-
-        // newArr.push(arr[i]);   // array method
+      if (arr[i] === a || arr[i] === b) {
+        delete arr[i];
+      }
+      else {
+        newArr[newArr.length] = arr[i];
       }
     }
-      console.log(newArr);
-      return newArr;
+    return newArr;
     // with array methods
     // var newArr = [];
     // for (var i = 0; i < arr.length; i++) {
@@ -331,19 +332,14 @@ global.bruhdash = {
       
 
   // returns an array with specified values excluded
-  difference: function(arr, value) {
-    for (var j = 0; j < value.length; j++) {
-      for (var i = 0; i < arr.length; i++) {
-        if(arr[i]===value[j]){
-
-          // arr.splice(i,1);   // array method
-        }
-        console.log(arr[i]);
-        console.log(value[j]);
-      }
-    }
-    console.log(arr);
-    return arr;
+  difference: function(arr1, arr2) {
+    var newArr = [];
+    for (var i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) {
+        newArr[newArr.length] = arr1[i];
+      } 
+    } 
+    return newArr;
     // with array methods
     // for (var j = 0; j < value.length; j++) {
     //   for (var i = 0; i < arr.length; i++) {
