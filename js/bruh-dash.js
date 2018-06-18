@@ -400,23 +400,41 @@ global.bruhdash = {
 
   // creates an array of elements into groups of length of specified size
   chunk: function(arr, chunkSize){
-    var newArr = [];
-    if (arr === [] || chunkSize === 0) {
-      return newArr;
+    if (arr.length === 0) {
+      return [];
     }
-    else if (chunkSize >= arr.length) {
+    else if (chunkSize === 0) {
+      return [];
+    }
+    else if (chunkSize > arr.length) {
+      return [arr];
+    }
+    else if (chunkSize === arr.length) {
       return [arr];
     }
     else {
-      // for (var i = 0; i < arr.length; i += chunkSize) {
-        
-        newArr.push(arr.slice(i, i + chunkSize));
-        console.log(i);
-        console.log(chunkSize);
-        console.log(newArr);
+      // var newChunk = [];
+      // for (var i = 0; i < chunkSize; i++) {
+      //   newChunk[newChunk.length] = arr[i];
       // }
+      // var endChunk = [];
+      // for (var i = chunkSize; i < arr.length; i++) {
+      //   endChunk[endChunk.length] = arr[i];
+      // }
+      var newArr = [];
+      if (arr.length % 2 === 0) {  
+        for (var i = 0; i < arr.length; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + chunkSize-1]];
+        }
+      }
+      else {
+        for (var i = 0; i < arr.length-1; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + chunkSize-1]];
+        }
+          newArr[newArr.length] = [arr[arr.length-1]];
+      }
+      return newArr;
     }
-    return newArr;
   },
 
   // iterates over elements of a collection and invokes iteratee for each element
