@@ -362,8 +362,7 @@ global.bruhdash = {
   zip: function (arr1, arr2) {
     var combined = [];
     for (var i = 0; i < arr1.length; i++) {
-
-      // combined.push([arr1[i], arr2[i]]);   // array method
+      combined[combined.length] = [arr1[i], arr2[i]];
     }
     return combined;
     // with array methods
@@ -380,9 +379,8 @@ global.bruhdash = {
     var arr2 = [];
     for (var i = 0; i < arr.length; i++) {
       for (var j = 0; j < arr.length; j++) {
-
-        // arr1.push(arr[i][j]);    // array method
-        // arr2.push(arr[i][j + 1]);    // array method
+        arr1[arr1.length] = arr[i][j];
+        arr2[arr2.length] = arr[i][j + 1];
         break;
       }
     }
