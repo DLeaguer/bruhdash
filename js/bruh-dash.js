@@ -14,10 +14,14 @@ global.bruhdash = {
       return arr[0];
   },
 
+
+
   // returns the last element of an array
   last: function (arr) {
     return arr[arr.length-1];
   },
+
+
 
   // returns the index of the first matching element from left to right
   indexOf: function (arr, value) {
@@ -29,6 +33,8 @@ global.bruhdash = {
     return -1;
   },
 
+
+
   // returns the index of the first matching element from right to left
   lastIndexOf: function (arr, value) {
     for (var i = arr.length-1; i >= 0; i--) {
@@ -38,6 +44,8 @@ global.bruhdash = {
     }
     return -1;
   },
+
+
 
   // returns an array with all elements except for the last element
   initial: function (arr) {
@@ -50,6 +58,8 @@ global.bruhdash = {
     // return arr.slice(0, -1);   // array method
   },
   
+
+
   // returns an array with all falsey values removed
   compact: function(arr) {
     var newArr = [];
@@ -73,6 +83,8 @@ global.bruhdash = {
     // return arr;
   },
 
+
+
   // creates a slice of an array from the start index up to but not including the end index
   slice: function (arr, start, end) {
     var newArr = [];
@@ -83,6 +95,8 @@ global.bruhdash = {
     return newArr;
     // return arr.slice(start, end);    // array method
   },
+
+
 
   // returns a slice of array with n elements dropped from the beignning
   drop: function(arr, n){
@@ -117,6 +131,8 @@ global.bruhdash = {
     // }
   },
 
+
+
   // returns a slice of array with n elements dropped from the end
   dropRight: function(arr, n) {
     if (n === undefined) {
@@ -147,6 +163,8 @@ global.bruhdash = {
     //   return arr.slice(0, -n);
     // }
   },
+
+
 
   // creates a slice of an array with n elements taken from the beginning
   take: function (arr, n) {
@@ -184,6 +202,8 @@ global.bruhdash = {
     // }
   },
 
+
+
   // creates a slice of an array with n elements taken from the end
   takeRight: function (arr, n) {
     if (n === undefined) {
@@ -219,6 +239,8 @@ global.bruhdash = {
     //   return arr.slice(-n);
     // }
   },
+
+
 
   // fills elements of array with specified value from the start index
   // up to but not including the end index
@@ -262,6 +284,8 @@ global.bruhdash = {
     // return arr;
   },
 
+
+
   // removes all given values from an array
   pull: function (arr, value1, value2) {
     console.log(' all ', arr, value1, value2)
@@ -287,6 +311,8 @@ global.bruhdash = {
     // return arr;
   },
 
+
+
   // removes elements of an array corresponding to the given indices
   pullAt: function (arr, index) {
     var newArr = [];
@@ -306,6 +332,8 @@ global.bruhdash = {
     // var fix = removedItems.sort().toString().split(',').map(Number);
     // return fix;
   },
+
+
 
   // creates an array excluding all the specified values
   without: function(arr, a, b) {
@@ -329,7 +357,8 @@ global.bruhdash = {
     //   console.log(newArr);
     //   return newArr;
   },
-      
+  
+  
 
   // returns an array with specified values excluded
   difference: function(arr1, arr2) {
@@ -354,6 +383,8 @@ global.bruhdash = {
     // return arr;
   },
 
+
+
   /*******************
    *  STRETCH GOALS! *
    *******************/ 
@@ -372,6 +403,8 @@ global.bruhdash = {
     // }
     // return combined;
   },
+
+
 
   // creates an array of grouped elements in their pre-zip configuration
   unzip: function (arr) {
@@ -398,6 +431,8 @@ global.bruhdash = {
     // return [arr1, arr2];
   },
 
+
+
   // creates an array of elements into groups of length of specified size
   chunk: function(arr, chunkSize){
     if (arr.length === 0 || chunkSize === 0) {
@@ -408,12 +443,16 @@ global.bruhdash = {
     }
     else {
       var newArr = [];
+
+      // chunkSize is 1
       if (chunkSize === 1) {
         for (var i = 0; i < arr.length; i += chunkSize) {
           newArr[newArr.length] = [arr[i]];
           console.log('  newArr  ', newArr);
         }
       }
+
+      // chunkSize is 2
       if (chunkSize === 2 && arr.length % 2 === 1) {
         for (var i = 0; i < arr.length-1; i += chunkSize) {
           console.log('  arr[i]  ', arr[i]);
@@ -430,6 +469,8 @@ global.bruhdash = {
           console.log('  newArr  ', newArr);
         }
       }
+
+      // chunkSize is 3
       if (chunkSize === 3 && arr.length % 3 === 2) {
         for (var i = 0; i < arr.length-2; i += chunkSize) {
           newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2]];
@@ -452,6 +493,8 @@ global.bruhdash = {
           console.log('  newArr  ', newArr);
         }
       }
+      
+      // chunkSize is 4
       if (chunkSize === 4 && arr.length % 4 === 3) {
         for (var i = 0; i < arr.length-3; i += chunkSize) {
           newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3]];
@@ -482,6 +525,8 @@ global.bruhdash = {
           console.log('  newArr  ', newArr);
         }
       }
+
+      // chunkSize is 5
       if (chunkSize === 5 && arr.length % 5 === 4) {
         for (var i = 0; i < arr.length-4; i += chunkSize) {
           newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3], arr[i + 4]];
@@ -524,19 +569,38 @@ global.bruhdash = {
     }
   },
 
+
+
   // iterates over elements of a collection and invokes iteratee for each element
   // Note: this should work for arrays and objects
-  forEach: function(collection, iteratee) {
-    for (var key in collection) {
-      iteratee(collection[key])
+  forEach: function(arr, func) {
+    // newArr = [];
+    for (var i in arr) {
+      func(arr[i]);
+      // newArr[newArr.length] = arr[i];
     }
+    // console.log(newArr);
+    // return newArr;
+    
+    // with array method 
+    // for (var key in collection) {
+    //   iteratee(collection[key])
+    // }
   },
+
+
 
   // creates an array of values by running each element in collection thru the iteratee
   // Note: this should work for arrays and objects
-  map: function() {
-
+  map: function(arr, func) {
+    newArr= [];
+    for (var i in arr) {
+      newArr[newArr.length] = func(arr[i]);
+    }
+    return newArr;
   },
+
+
 
   /*************************
    *  SUPER STRETCH GOALS!  *
@@ -544,14 +608,26 @@ global.bruhdash = {
 
   // iterates over elements of a collection and returns all elements that the predicate returns truthy for
   // Note: this should work for arrays and objects
-  filter: function() {
-
+  filter: function(arr, func) {
+    newArr = [];
+    for (var i in arr) {
+      if (func(arr[i]) === true) {
+        newArr[newArr.length] = arr[i];
+      }
+    }
+    return newArr;
   },
 
+
+  
   // Reduces the collection to a value which is the accumulated result of running each element
   // in the collection through an iteratee
   // Note: this should work for arrays and objects
-  reduce: function() {
-    
+  reduce: function(arr) {
+    num = 0;
+    for (var i in arr) {
+      num += arr[i];
+    }
+    return num;
   }
 };
