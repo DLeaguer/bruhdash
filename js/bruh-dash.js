@@ -400,38 +400,125 @@ global.bruhdash = {
 
   // creates an array of elements into groups of length of specified size
   chunk: function(arr, chunkSize){
-    if (arr.length === 0) {
+    if (arr.length === 0 || chunkSize === 0) {
       return [];
     }
-    else if (chunkSize === 0) {
-      return [];
-    }
-    else if (chunkSize > arr.length) {
-      return [arr];
-    }
-    else if (chunkSize === arr.length) {
+    else if (chunkSize > arr.length || chunkSize === arr.length) {
       return [arr];
     }
     else {
-      // var newChunk = [];
-      // for (var i = 0; i < chunkSize; i++) {
-      //   newChunk[newChunk.length] = arr[i];
-      // }
-      // var endChunk = [];
-      // for (var i = chunkSize; i < arr.length; i++) {
-      //   endChunk[endChunk.length] = arr[i];
-      // }
       var newArr = [];
-      if (arr.length % 2 === 0) {  
+      if (chunkSize === 1) {
         for (var i = 0; i < arr.length; i += chunkSize) {
-          newArr[newArr.length] = [arr[i], arr[i + chunkSize-1]];
+          newArr[newArr.length] = [arr[i]];
+          console.log('  newArr  ', newArr);
         }
       }
-      else {
+      if (chunkSize === 2 && arr.length % 2 === 1) {
         for (var i = 0; i < arr.length-1; i += chunkSize) {
-          newArr[newArr.length] = [arr[i], arr[i + chunkSize-1]];
+          console.log('  arr[i]  ', arr[i]);
+          newArr[newArr.length] = [arr[i], arr[i + 1]];
+          console.log('  newArr  ', newArr);
         }
-          newArr[newArr.length] = [arr[arr.length-1]];
+        newArr[newArr.length] = [arr[i]];
+        console.log('  newArr + end  ', newArr);
+      }
+      if (chunkSize === 2 && arr.length % 2 === 0) {
+        for (var i = 0; i < arr.length-1; i += chunkSize) {
+          console.log('  arr[i]  ', arr[i]);
+          newArr[newArr.length] = [arr[i], arr[i + 1]];
+          console.log('  newArr  ', newArr);
+        }
+      }
+      if (chunkSize === 3 && arr.length % 3 === 2) {
+        for (var i = 0; i < arr.length-2; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2]];
+          console.log('  newArr  ', newArr);
+        }
+        newArr[newArr.length] = [arr[i], arr[i + 1]];
+        console.log('  newArr  ', newArr);
+      }
+      if (chunkSize === 3 && arr.length % 3 === 1) {
+        for (var i = 0; i < arr.length-2; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2]];
+          console.log('  newArr  ', newArr);
+        }
+        newArr[newArr.length] = [arr[i]];
+        console.log('  newArr  ', newArr);
+      }
+      if (chunkSize === 3 && arr.length % 3 === 0) {
+        for (var i = 0; i < arr.length-2; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2]];
+          console.log('  newArr  ', newArr);
+        }
+      }
+      if (chunkSize === 4 && arr.length % 4 === 3) {
+        for (var i = 0; i < arr.length-3; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3]];
+          console.log('  newArr  ', newArr);
+        }
+        newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2]];
+        console.log('  newArr  ', newArr);
+      }
+      if (chunkSize === 4 && arr.length % 4 === 2) {
+        for (var i = 0; i < arr.length-3; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3]];
+          console.log('  newArr  ', newArr);
+        }
+        newArr[newArr.length] = [arr[i], arr[i + 1]];
+        console.log('  newArr  ', newArr);
+      }
+      if (chunkSize === 4 && arr.length % 4 === 1) {
+        for (var i = 0; i < arr.length-3; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3]];
+          console.log('  newArr  ', newArr);
+        }
+        newArr[newArr.length] = [arr[i]];
+        console.log('  newArr  ', newArr);
+      }
+      if (chunkSize === 4 && arr.length % 4 === 0) {
+        for (var i = 0; i < arr.length-3; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3]];
+          console.log('  newArr  ', newArr);
+        }
+      }
+      if (chunkSize === 5 && arr.length % 5 === 4) {
+        for (var i = 0; i < arr.length-4; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3], arr[i + 4]];
+          console.log('  newArr  ', newArr);
+        }
+        newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3]];
+        console.log('  newArr  ', newArr);
+      }
+      if (chunkSize === 5 && arr.length % 5 === 3) {
+        for (var i = 0; i < arr.length-4; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3], arr[i + 4]];
+          console.log('  newArr  ', newArr);
+        }
+        newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2]];
+        console.log('  newArr  ', newArr);
+      }
+      if (chunkSize === 5 && arr.length % 5 === 2) {
+        for (var i = 0; i < arr.length-4; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3], arr[i + 4]];
+          console.log('  newArr  ', newArr);
+        }
+        newArr[newArr.length] = [arr[i], arr[i + 1]];
+        console.log('  newArr  ', newArr);
+      }
+      if (chunkSize === 5 && arr.length % 5 === 1) {
+        for (var i = 0; i < arr.length-4; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3], arr[i + 4]];
+          console.log('  newArr  ', newArr);
+        }
+        newArr[newArr.length] = [arr[i]];
+        console.log('  newArr  ', newArr);
+      }
+      if (chunkSize === 5 && arr.length % 5 === 0) {
+        for (var i = 0; i < arr.length-4; i += chunkSize) {
+          newArr[newArr.length] = [arr[i], arr[i + 1], arr[i + 2], arr[i + 3], arr[i + 4]];
+          console.log('  newArr  ', newArr);
+        }
       }
       return newArr;
     }
